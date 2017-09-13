@@ -5,4 +5,5 @@
 > EmbarkedQueenstown <- c(ifelse((titanic_train[,12] == "Q"),1,0))
 > EmbarkedSouthampton <- c(ifelse((titanic_train[,12] == "S"),1,0))
 > train_data_v1 <- cbind(titanic_train,EmbarkedCherbourg,EmbarkedQueenstown,EmbarkedSouthampton)
+> train_data_v1$Age <- round(train_data_v1$Age, 0)
 > View(train_data_v1)
