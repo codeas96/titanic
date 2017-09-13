@@ -1,0 +1,7 @@
+titanic_train <- read_csv("C:/Users/luismiguel.ferreira/Desktop/MachineLearning/Project_Titanic/Datasets/train.csv")
+View(titanic_train)
+EmbarkedCherbourg <- c(ifelse((titanic_train[,12] == "C"),1,0))
+EmbarkedQueenstown <- c(ifelse((titanic_train[,12] == "Q"),1,0))
+EmbarkedSouthhampton <- c(ifelse((titanic_train[,12] == "S"),1,0))
+test_data_v1 <- cbind(titanic_train,EmbarkedCherbourg,EmbarkedQueenstown,EmbarkedSouthhampton)
+View(test_data_v1)

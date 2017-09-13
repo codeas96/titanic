@@ -1,3 +1,0 @@
-titanic_train <- read_csv("C:/Users/luismiguel.ferreira/Desktop/MachineLearning/Project_Titanic/Datasets/train.csv")
-View(titanic_train)
-EmbarkedCherbourg <- c(ifelse((titanic_train[,12] == "C"),1,0))
