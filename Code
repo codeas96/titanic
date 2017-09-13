@@ -14,3 +14,12 @@
 > cabin_sector <- c(substring(train_data_v1$Cabin,1,1))
 > train_data_v1 <- cbind(train_data_v1,cabin_sector)
 > train_data_v2 <- train_data_v1[complete.cases(train_data_v1$Age),]
+# -------------------------------------------------------------------------
+# DATA ANALYSIS AND EXPLORATION
+# -------------------------------------------------------------------------
+# import "ggplot2" package
+# import "scales" package
+# import "graphics" package
+# import "stats" package
+> summary(train_data_v1)
+> qplot(train_data_v2$Age, geom="histogram", main="Age Distribution", xlab = "Age", binwidth = 0.5)
