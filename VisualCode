@@ -1,5 +1,0 @@
-# import "ggplot2" package
-# import "scales" package
-# import "graphics" package
-# import "stats" package
-> summary(train_data_v1)
