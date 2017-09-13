@@ -1,3 +1,6 @@
+# -------------------------------------------------------------------------
+# BUILDING AND IMPROVING THE TRAIN DATASET
+# -------------------------------------------------------------------------
 # Import "readr" package
 > titanic_train <- read_csv("C:/Users/luismiguel.ferreira/Desktop/MachineLearning/Project_Titanic/Datasets/train.csv")
 > View(titanic_train)
@@ -5,5 +8,9 @@
 > EmbarkedQueenstown <- c(ifelse((titanic_train[,12] == "Q"),1,0))
 > EmbarkedSouthampton <- c(ifelse((titanic_train[,12] == "S"),1,0))
 > train_data_v1 <- cbind(titanic_train,EmbarkedCherbourg,EmbarkedQueenstown,EmbarkedSouthampton)
+> male <- c(ifelse(train_data_v1$Sex == "male",1,0))
+> train_data_v1 <- cbind(train_data_v1,male)
 > train_data_v1$Age <- round(train_data_v1$Age, 0)
-> View(train_data_v1)
+> cabin_sector <- c(substring(train_data_v1$Cabin,1,1))
+> train_data_v1 <- cbind(train_data_v1,cabin_sector)
+> train_data_v2 <- train_data_v1[complete.cases(train_data_v1$Age),]
