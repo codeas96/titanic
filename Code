@@ -40,3 +40,16 @@
 +                  + EmbarkedSouthampton + male + UpperCl + MiddleCl + LowerCl, 
 +                  family = binomial(link = "probit"), data = train_data_v4)
 > summary(myprobit1)
+# -------------------------------------------------------------------------
+# TESTING
+# -------------------------------------------------------------------------
+> test_data <- read_csv("C:/Users/luismiguel.ferreira/Desktop/MachineLearning/Project_Titanic/Datasets/test.csv")
+> EmbarkedSouthampton <- c(ifelse((test_data[,11] == "S"),1,0))
+> EmbarkedCherbourg <- c(ifelse((test_data[,11] == "C"),1,0))
+> EmbarkedQueenstown <- c(ifelse((test_data[,11] == "Q"),1,0))
+> male <- c(ifelse(test_data$Sex == "male",1,0))
+> UpperCl <- c(ifelse((test_data[,2] == "1"),1,0))
+> MiddleCl <- c(ifelse((test_data[,2] == "2"),1,0))
+> LowerCl <- c(ifelse((test_data[,2] == "3"),1,0))
+> test_data_real <- subset(cbind(test_data,EmbarkedCherbourg,EmbarkedQueenstown,EmbarkedSouthampton, male,
+UpperCl, MiddleCl, LowerCl), select = -c(Sex, Pclass, Parch, Fare, Name,Ticket,Cabin, Embarked))
