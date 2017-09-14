@@ -40,6 +40,16 @@
 +                  + EmbarkedSouthampton + male + UpperCl + MiddleCl + LowerCl, 
 +                  family = binomial(link = "probit"), data = train_data_v4)
 > summary(myprobit1)
+> fitLogistic = function(x,y){
++     tmp=data.frame(cbind(y,x))
++     fit=glm(factor(Survived) ~ Age + SibSp + EmbarkedCherbourg + EmbarkedQueenstown + male + UpperCl + MiddleCl , family = binomial(link = "probit"), data = train_data_v4)
++     fit
++ } 
+> predict.logistic = function(fitLog,x){
++     x=as.data.frame(x)
++     pred.logistic=predict(fitLog,newdata=x,type='response')
++     ifelse(pred.logistic>=.5,1,0)
++ } 
 # -------------------------------------------------------------------------
 # TESTING
 # -------------------------------------------------------------------------
@@ -53,3 +63,6 @@
 > LowerCl <- c(ifelse((test_data[,2] == "3"),1,0))
 > test_data_real <- subset(cbind(test_data,EmbarkedCherbourg,EmbarkedQueenstown,EmbarkedSouthampton, male,
 UpperCl, MiddleCl, LowerCl), select = -c(Sex, Pclass, Parch, Fare, Name,Ticket,Cabin, Embarked))
+> pred<- predict.logistic(myprobit1,test_data_real)
+> compare <- cbind(gender_submission,pred)
+> compare <- compare[complete.cases(compare),]
