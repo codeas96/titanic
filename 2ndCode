@@ -44,4 +44,6 @@
 > train <- full[1:891,]
 > test <- full[892:1309,]
 > ggplot(full[1:891,], aes(Deck, fill = factor(Survived))) + geom_histogram(stat = "count")
+> myprobit2 <- glm(Survived ~ Age + Fare + Male + UpClass + MidClass +  Alone + LargeFam + Embarked_C + Embarked_Q  + Deck_F + Deck_E, family = binomial(link = "probit"), data = train)
+> summary(myprobit2)
 
