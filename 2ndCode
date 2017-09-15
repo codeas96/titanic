@@ -13,3 +13,15 @@ Error in `[.data.frame`(full, factor_vars) : undefined columns selected
 > mice_output <- complete(mice_mod)
 > full$Age <- mice_output$Age
 > full$cabin_sector <- mice_output$cabin_sector
+> Male <- ifelse(full$Sex == "male",1,0)
+> UpClass <- ifelse(full$Pclass == "1",1,0)
+> MidClass <- ifelse(full$Pclass == "2",1,0)
+> LowClass <- ifelse(full$Pclass == "3",1,0)
+> Alone <- ifelse(full$FsizeD == "singleton",1,0)
+> LargeFam <- ifelse(full$FsizeD == "large",1,0)
+> Embarked_C <- (ifelse((full$Embarked == "C"),1,0))
+> Embarked_Q <- (ifelse((full$Embarked == "Q"),1,0))
+> Embarked_S <- (ifelse((full$Embarked == "S"),1,0))
+> ggplot(full[1:891,], aes(Fare, fill = factor(Survived))) + 
++     geom_histogram()
+> train_data <- cbind(full,Male,UpClass,MidClass,LowClass,Alone,LargeFam,Embarked_C,Embarked_Q,Embarked_S)
