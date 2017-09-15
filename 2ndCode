@@ -46,4 +46,11 @@
 > ggplot(full[1:891,], aes(Deck, fill = factor(Survived))) + geom_histogram(stat = "count")
 > myprobit2 <- glm(Survived ~ Age + Fare + Male + UpClass + MidClass +  Alone + LargeFam + Embarked_C + Embarked_Q  + Deck_F + Deck_E, family = binomial(link = "probit"), data = train)
 > summary(myprobit2)
-
+> predict.logistic = function(fitLog,x){
++          x=as.data.frame(x)
++          pred.logistic=predict(fitLog,newdata=x,type='response')
++          ifelse(pred.logistic>=.5,1,0)
++     } 
+> pred <- predict.logistic(myprobit2,test)
+> export <- cbind(test$PassengerId,pred)
+> write.csv(export, file = "Probit2.csv",row.names=FALSE)
