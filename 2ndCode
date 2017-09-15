@@ -21,7 +21,6 @@
 > mice_output <- complete(mice_mod)
 > full$Age <- mice_output$Age
 > full$Deck <- mice_output$Deck
-
 > Male <- ifelse(full$Sex == "male",1,0)
 > UpClass <- ifelse(full$Pclass == "1",1,0)
 > MidClass <- ifelse(full$Pclass == "2",1,0)
@@ -36,3 +35,13 @@
 > full <- cbind(full,Male,UpClass,MidClass,LowClass,Alone,LargeFam,Embarked_C,Embarked_Q,Embarked_S)
 > full <- subset(full, select = -c(Sex, Pclass, Parch,Name,Ticket,Cabin ))
 > full <- subset(full, select = -c(FsizeD,Fsize))
+> full <- subset(full, select = -c(Embarked))
+> ggplot(full[1:891,], aes(Deck, fill = factor(Survived))) + geom_histogram(stat = "count")
+> full$Deck_F <- ifelse(full$Deck == "F",1,0)
+> full$Deck_D <- ifelse(full$Deck == "D",1,0)
+> full$Deck_E <- ifelse(full$Deck == "E",1,0)
+> full <- subset(full, select = -c(Deck))
+> train <- full[1:891,]
+> test <- full[892:1309,]
+> ggplot(full[1:891,], aes(Deck, fill = factor(Survived))) + geom_histogram(stat = "count")
+
