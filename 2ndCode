@@ -1,18 +1,27 @@
 > library(readr)
 > train <- read_csv("C:/Users/luismiguel.ferreira/Desktop/MachineLearning/Project_Titanic/Datasets/train.csv")
-> cabin_sector <- c(substring(train$Cabin,1,1))
-> train <- cbind(train,cabin_sector)
-> table(train$Embarked)
-> table(train$Embarked,train$cabin_sector)
-> table(train$Embarked,train$Pclass)
-> table(train$cabin_sector,train$Pclass)
-> table(train$cabin_sector,train$Survived)
-> full[factor_vars] <- lapply(full[factor_vars], function(x) as.factor(x))
-Error in `[.data.frame`(full, factor_vars) : undefined columns selected
+> test <- read_csv("C:/Users/luismiguel.ferreira/Desktop/MachineLearning/Project_Titanic/Datasets/test.csv")
+> full <- plyr::rbind.fill(train,test)
+> Deck <- c(substring(full$Cabin,1,1))
+> full <- cbind(full,Deck)
+> table(full$Embarked)
+> table(full$Embarked,full$Deck)
+> table(full$Embarked,full$Pclass)
+> table(full$Deck,full$Pclass)
+> table(full$Deck,full$Survived)
+> full$Fsize <- full$SibSp + full$Parch + 1
+> full$FsizeD[full$Fsize == 1] <- 'singleton'
+> full$FsizeD[full$Fsize < 5 & full$Fsize > 1] <- 'small'
+> full$FsizeD[full$Fsize > 4] <- 'large'
+> full$Embarked[c(62, 830)] <- 'C'
+> full$Fare[1044] <- median(full[full$Pclass == '3' & full$Embarked == 'S', ]$Fare, na.rm = TRUE)
+> factor_vars <- c('PassengerId','Pclass','Sex','Embarked',
+                 'Title','Surname','Family','FsizeD')
 > mice_mod <- mice(full[, !names(full) %in% c('PassengerId','Name','Ticket','Cabin','Family','Surname','Survived')], method='rf') 
 > mice_output <- complete(mice_mod)
 > full$Age <- mice_output$Age
-> full$cabin_sector <- mice_output$cabin_sector
+> full$Deck <- mice_output$Deck
+
 > Male <- ifelse(full$Sex == "male",1,0)
 > UpClass <- ifelse(full$Pclass == "1",1,0)
 > MidClass <- ifelse(full$Pclass == "2",1,0)
@@ -24,4 +33,6 @@ Error in `[.data.frame`(full, factor_vars) : undefined columns selected
 > Embarked_S <- (ifelse((full$Embarked == "S"),1,0))
 > ggplot(full[1:891,], aes(Fare, fill = factor(Survived))) + 
 +     geom_histogram()
-> train_data <- cbind(full,Male,UpClass,MidClass,LowClass,Alone,LargeFam,Embarked_C,Embarked_Q,Embarked_S)
+> full <- cbind(full,Male,UpClass,MidClass,LowClass,Alone,LargeFam,Embarked_C,Embarked_Q,Embarked_S)
+> full <- subset(full, select = -c(Sex, Pclass, Parch,Name,Ticket,Cabin ))
+> full <- subset(full, select = -c(FsizeD,Fsize))
