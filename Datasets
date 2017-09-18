@@ -56,3 +56,9 @@ LowClass, Alone, LargeFam, Embarked_C,Embarked_Q, Embarked_S))
 > attempt_2$Sex <- as.factor(attempt_2$Sex)
 > train_a2 <- attempt_2[1:891,]
 > test_a2 <- attempt_2 [892:1309,]
+---------------------------------------------------------------------------------------------------------------
+# attempt_3 Dataset
+--------------------------------------------------------------------------------------------------------------
+> attempt_3 <- subset(full, select = -c(Name,Pclass,Sex,Ticket, Cabin, Embarked, Fsize, FsizeD, Deck, Title, Child))
+> train_a3 <- attempt_3[1:891,]
+> test_a3 <- attempt_3 [892:1309,]
