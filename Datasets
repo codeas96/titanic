@@ -29,3 +29,10 @@
 > Embarked_Q <- (ifelse((full$Embarked == "Q"),1,0))
 > Embarked_S <- (ifelse((full$Embarked == "S"),1,0))
 > full <- cbind(full,Male,UpClass,MidClass,LowClass,Alone,LargeFam,Embarked_C,Embarked_Q,Embarked_S)
+---------------------------------------------------------------------------------------------------------------
+# attempt_1 Dataset
+---------------------------------------------------------------------------------------------------------------
+> attempt_1 <- subset(full, select = -c(Name,Sex,Ticket, Cabin, Fsize, UpClass, MidClass, 
+LowClass, Alone, LargeFam, Embarked_C,Embarked_Q, Embarked_S))
+> train_a1 <- attempt_1[1:891,]
+> test_a1 <- attempt_1 [892:1309,]
