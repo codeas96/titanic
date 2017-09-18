@@ -53,5 +53,6 @@ LowClass, Alone, LargeFam, Embarked_C,Embarked_Q, Embarked_S))
 > attempt_2$FsizeD <- as.factor(attempt_2$FsizeD)
 > attempt_2$Title <- as.factor(attempt_2$Title)
 > attempt_2$Child <- as.factor(attempt_2$Child)
+> attempt_2$Sex <- as.factor(attempt_2$Sex)
 > train_a2 <- attempt_2[1:891,]
 > test_a2 <- attempt_2 [892:1309,]
