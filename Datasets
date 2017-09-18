@@ -44,3 +44,14 @@ LowClass, Alone, LargeFam, Embarked_C,Embarked_Q, Embarked_S))
 ---------------------------------------------------------------------------------------------------------------
 > full$Child[full$Age < 18] <- 'Child'
 > full$Child[full$Age >= 18] <- 'Adult'
+---------------------------------------------------------------------------------------------------------------
+# attempt_2 Dataset
+---------------------------------------------------------------------------------------------------------------
+> attempt_2 <- subset(full, select = -c(Name,Male,Ticket, Cabin, Fsize, UpClass, MidClass, 
+                                        LowClass, Alone, LargeFam, Embarked_C,Embarked_Q, Embarked_S))
+> attempt_2$Embarked <- as.factor(attempt_2$Embarked)
+> attempt_2$FsizeD <- as.factor(attempt_2$FsizeD)
+> attempt_2$Title <- as.factor(attempt_2$Title)
+> attempt_2$Child <- as.factor(attempt_2$Child)
+> train_a2 <- attempt_2[1:891,]
+> test_a2 <- attempt_2 [892:1309,]
