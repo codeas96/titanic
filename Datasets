@@ -39,3 +39,8 @@ LowClass, Alone, LargeFam, Embarked_C,Embarked_Q, Embarked_S))
 > attempt_1$Title <- as.factor(attempt_1$Title)
 > train_a1 <- attempt_1[1:891,]
 > test_a1 <- attempt_1 [892:1309,]
+---------------------------------------------------------------------------------------------------------------
+# Adding Var "Child" to Full
+---------------------------------------------------------------------------------------------------------------
+> full$Child[full$Age < 18] <- 'Child'
+> full$Child[full$Age >= 18] <- 'Adult'
