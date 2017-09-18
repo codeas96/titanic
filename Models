@@ -19,3 +19,24 @@ set.seed(754)
 > prediction_a1 <- predict(rf_model, test_a1)
 > solution_a1 <- data.frame(PassengerID = test$PassengerId, Survived = prediction_a1)
 > write.csv(solution_a1, file = 'X _ XXXXX - RandomForest - 18-09.csv', row.names = F)
+------------------------------------------------------------------------------------
+# Random Forest with "attempt_2" dataset
+------------------------------------------------------------------------------------
+> rf_model_2 <- randomForest(factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + 
+                            Fare + Embarked + Title +  FsizeD + Deck + Child, 
+                            data = train_a2, na.action = na.omit)
+> importance_a2 <- importance(rf_model_2)
+> varImportance_a2 <- data.frame(Variables = row.names(importance_a2), 
+                               Importance_a2 = round(importance_a2[ ,'MeanDecreaseGini'],2)) 
+> rankImportance_a2 <- varImportance_a2 %>% mutate(Rank = paste0('#',dense_rank(desc(Importance_a2))))
+> ggplot(rankImportance_a2, aes(x = reorder(Variables, importance_a2), 
+                           y = importance_a2, fill = Importance_a2)) +
+     geom_bar(stat='identity') + 
+     geom_text(aes(x = Variables, y = 0.5, label = Rank),
+               hjust=0, vjust=0.55, size = 4, colour = 'red') +
+     labs(x = 'Variables') +
+     coord_flip() + 
+     theme_few()
+> prediction_a2 <- predict(rf_model_2, test_a2)
+> solution_a2 <- data.frame(PassengerID = test_a2$PassengerId, Survived = prediction_a2)
+> write.csv(solution_a2, file = 'X _ XXXXX - RandomForest - 18-09.csv', row.names = F)
