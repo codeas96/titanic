@@ -34,5 +34,8 @@
 ---------------------------------------------------------------------------------------------------------------
 > attempt_1 <- subset(full, select = -c(Name,Sex,Ticket, Cabin, Fsize, UpClass, MidClass, 
 LowClass, Alone, LargeFam, Embarked_C,Embarked_Q, Embarked_S))
+> attempt_1$Embarked <- as.factor(attempt_1$Embarked)
+> attempt_1$FsizeD <- as.factor(attempt_1$FsizeD)
+> attempt_1$Title <- as.factor(attempt_1$Title)
 > train_a1 <- attempt_1[1:891,]
 > test_a1 <- attempt_1 [892:1309,]
