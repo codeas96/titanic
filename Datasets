@@ -1,3 +1,6 @@
+---------------------------------------------------------------------------------------------------------------
+# Full with 25 var's and no Null's
+---------------------------------------------------------------------------------------------------------------
 > library(readr)
 > train <- read_csv("C:/Users/luismiguel.ferreira/Desktop/MachineLearning/Project_Titanic/Datasets/train.csv")
 > test <- read_csv("C:/Users/luismiguel.ferreira/Desktop/MachineLearning/Project_Titanic/Datasets/test.csv")
