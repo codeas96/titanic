@@ -20,3 +20,11 @@ full$FareFac <- factor(full$Fare);
 
 ### Missing Values in Age
 
+mice_mod <- mice(full[, !names(full) %in% c('PassengerId','Name','Ticket','Cabin','Survived')], method='rf')
+mice_output <- complete(mice_mod)
+full$Age <- mice_output$Age
+
+### Child Var creation
+
+full$Child <- ifelse(full$Age <= 18, 1, 0)
+
