@@ -34,3 +34,5 @@ full$Child <- as.factor(full$Child)
 train_1 <- full[1:891,]
 train_1 <- subset(train_1, select = -c(Sex,SibSp,Parch,Name,Age,Ticket,Cabin,Fare,Embarked,FareFac ))
 rf_model <- randomForest(Survived ~ Pclass + male + Child, data = train_1, na.action = na.omit)
+test_1 <- full[892:1309,]
+test_1 <- subset(test_1, select = -c(Survived,Sex,SibSp,Parch,Name,Age,Ticket,Cabin,Fare,Embarked,FareFac ))
