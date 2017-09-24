@@ -27,4 +27,10 @@ full$Age <- mice_output$Age
 ### Child Var creation
 
 full$Child <- ifelse(full$Age <= 18, 1, 0)
+full$Child <- as.factor(full$Child)
 
+# train_1 Model
+
+train_1 <- full[1:891,]
+train_1 <- subset(train_1, select = -c(Sex,SibSp,Parch,Name,Age,Ticket,Cabin,Fare,Embarked,FareFac ))
+rf_model <- randomForest(Survived ~ Pclass + male + Child, data = train_1, na.action = na.omit)
