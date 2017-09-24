@@ -1,0 +1,22 @@
+# Data Import
+
+train <- read_csv("C:/Users/admin/Desktop/Luis/Kaggle/Proj_Titanic/Data/train.csv")
+test <- read_csv("C:/Users/admin/Desktop/Luis/Kaggle/Proj_Titanic/Data/test.csv")
+full <- rbind.fill(train, test)
+
+# Data Processing and Cleansing
+
+full$Survived <- as.factor(full$Survived)
+
+### Missing Value in Fare
+
+trControl <- trainControl(method="repeatedcv", number=7, repeats=5); 
+faremiss <- which(is.na(full$Fare))
+model_f   <- train( Fare ~ Pclass + Sex + Embarked + SibSp + Parch,
++                     data = full %>% filter(!is.na(Fare)),
++                     trControl = trControl, method="rpart", na.action = na.pass, tuneLength = 5);
+full$Fare[faremiss] = predict(model_f, full[faremiss,]); 
+full$FareFac <- factor(full$Fare); 
+
+### Missing Values in Age
+
